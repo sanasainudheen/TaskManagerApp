@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
 
 // routes config
 import routes from '../routes'
 
-const AppContent = () => {
+const AppContent = (props) => {
   return (
     <CContainer lg>
       <Suspense fallback={<CSpinner color="primary" />}>
@@ -27,12 +27,14 @@ const AppContent = () => {
               )
             )
           })}
-         <Redirect from="/" to="/dashboard" /> 
+         {/* <Redirect from="/" to="/dashboard" />  */}
           {/* <Redirect from="/" to="/login" /> */}
+          {/* console.log("check1")
+          props.history.push('/login') */}
         </Switch>
       </Suspense>
     </CContainer>
   )
 }
 
-export default React.memo(AppContent)
+export default withRouter(AppContent)

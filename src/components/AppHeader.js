@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   CContainer,
@@ -18,10 +18,16 @@ import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from '../assets/brand/logo'
 
-const AppHeader = () => {
+const AppHeader = (props) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
-
+  const handleLogout=()=>{
+  
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    props.history.push('/login');
+   // <Redirect from='/dashboard' to="/logout" /> 
+  }
   return (
     <CHeader position="sticky" className="mb-4">
       <CContainer fluid>
@@ -40,15 +46,15 @@ const AppHeader = () => {
               Dashboard
             </CNavLink>
           </CNavItem>
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink href="#">Users</CNavLink>
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">Settings</CNavLink>
-          </CNavItem>
+          </CNavItem> */}
         </CHeaderNav>
         <CHeaderNav>
-          <CNavItem>
+          {/* <CNavItem>
             <CNavLink href="#">
               <CIcon icon={cilBell} size="lg" />
             </CNavLink>
@@ -62,13 +68,18 @@ const AppHeader = () => {
             <CNavLink href="#">
               <CIcon icon={cilEnvelopeOpen} size="lg" />
             </CNavLink>
-          </CNavItem>
+          </CNavItem> */}
         </CHeaderNav>
-        <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+        <CHeaderNav className="ms-3" >
+          {/* <AppHeaderDropdown /> */}
+          <button type="button" className="btn btn-primary" onClick={handleLogout} >
+          Logout
+          </button>
         </CHeaderNav>
       </CContainer>
+      
       <CHeaderDivider />
+    
       <CContainer fluid>
         <AppBreadcrumb />
       </CContainer>
@@ -76,4 +87,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader
+export default withRouter(AppHeader)

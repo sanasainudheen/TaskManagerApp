@@ -13,15 +13,15 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
-import navigation from '../_nav'
+//import navigation from '../_nav'
 import nav from '../user_nav'
 
-const AppSidebar = () => {
+const AppUserSidebar = () => {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const role = localStorage.getItem("role");
-
+ 
   return (
    
     <CSidebar
@@ -39,7 +39,7 @@ const AppSidebar = () => {
           </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>       
-          <AppSidebarNav items={navigation} />         
+          <AppSidebarNav items={nav} />         
         </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler
@@ -51,5 +51,4 @@ const AppSidebar = () => {
   )
 }
 
-
-export default React.memo(AppSidebar)
+export default React.memo(AppUserSidebar)
