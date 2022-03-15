@@ -8,6 +8,7 @@ import { useTable } from "react-table";
 import { Table } from 'reactstrap';
 import { date } from "yup/lib/locale";
 import { width } from "@mui/system";
+import moment from 'moment';
 const UserGroupTasks=(props)=>{
     const [groups, setGroups] = useState([{id:0,categoryName:'Select A Group'}]);
     const [groupValue, setGroupValue] = React.useState("");
@@ -20,6 +21,9 @@ const UserGroupTasks=(props)=>{
     const [selUser, setSelUser] = React.useState("");
     const [users, setUsers] = useState([]);
     const [selUserGroupTaskId, setSelUserGroupTaskId] = React.useState("");
+    const [selectedFile, setSelectedFile] = React.useState(null);
+    const[note,setNote]=React.useState("");
+  
     const tasksRef = useRef();
     tasksRef.current = taskList;
     React.useEffect(()=>{
@@ -89,14 +93,14 @@ const UserGroupTasks=(props)=>{
               IsActive:"1",
               StatusId:"1"
           };
-          console.log(data);
+         
           TaskService.createUserGroupTask(data)
         .then((response) => {
           if (response.data.isSuccess) {
               alert(response.data.message);   
               handleModal();       
-              TaskService.getAllUserGroupTasks() .then((response) => {                          
-                setUserGroupTaskList(response.data);    
+              TaskService.getAllUserGroupTasks() .then((res) => {                          
+                setUserGroupTaskList(res.data);    
                 })
                 .catch((e) => {
                   console.log(e);
@@ -111,10 +115,7 @@ const UserGroupTasks=(props)=>{
         setShow(!show)  ;      
         }
         const  handleModal1=(groupId)=>{     
-            setShowUser(!showUser)  ;   
-           
-            console.log(selUserGroupTaskId);
-            console.log("test");
+            setShowUser(!showUser)  ;  
             getUsersByGroupId(groupId);   
             }
             const getUsersByGroupId=(groupId)=>{
@@ -184,9 +185,9 @@ const UserGroupTasks=(props)=>{
                 UserGroupTaskId:selUserGroupTaskId,
                 UserId:selUser,
                 StatusId:"2",
-                Attachment:"",
-                Note:"",
-                CreatedOn:"",
+                Attachment: selUserGroupTaskId+"."+selectedFile.name.split('.').pop()    ,
+                Note:note,
+                CreatedOn: moment(new Date()).format('YYYY-MM-DD'),
                 CreatedBy:"Admin"
             };
           
@@ -195,9 +196,9 @@ const UserGroupTasks=(props)=>{
             if (response.data.isSuccess) {
                 alert(response.data.message); 
                 handleModal2();
-                TaskService.getAllUserGroupTasks() .then((response) => {  
-                         
-                  setUserGroupTaskList(response.data);    
+                TaskService.getAllUserGroupTasks() .then((res) => {                           
+                 setUserGroupTaskList(res.data);                     
+                  onFileUpload();
                   })
                   .catch((e) => {
                     console.log(e);
@@ -207,7 +208,32 @@ const UserGroupTasks=(props)=>{
                 alert(response.data.errors);
             }
         })
-           }     
+           }  
+     const  onFileChange = (e) => {
+    
+            // Update the state
+            setSelectedFile(e.target.files[0]);           
+          
+          };
+       const onFileUpload = () => {
+               const formData = new FormData();
+         var fileExtension = selectedFile.name.split('.').pop();
+        
+         formData.append(
+           "myFile",
+           selectedFile,
+           selUserGroupTaskId+"."+fileExtension          
+         );                       
+            console.log(selUserGroupTaskId+"."+fileExtension  );
+     
+             TaskService.uploadDoc(formData) .then(          
+              (response) => {
+                 console.log("success");
+               }, () => {
+                 console.log("fail");
+               });
+            
+          };   
     return(
         <div>
         <div className="row">
@@ -298,7 +324,7 @@ onChange={ e=>{setGroupValue(e.target.selectedOptions[0].value)}}>
 
 </div>
         <Modal show={showUser} onHide={()=>handleModal1()}>  
-          <Modal.Header>Select a User</Modal.Header>  
+          <Modal.Header></Modal.Header>  
           <Modal.Body>
           <select  className="form-control" value={selUser} onChange={e=>setSelUser(e.currentTarget.value)}>
    {
@@ -308,6 +334,16 @@ onChange={ e=>{setGroupValue(e.target.selectedOptions[0].value)}}>
        ))
    }
    </select>   
+   <div>
+     <label>Enter Note:</label>
+   <input className="form-control" type="textarea" placeholder="Note"  onChange={(e)=>{setNote(e.target.value)}}></input>
+   </div>
+   <div>
+     <label></label>
+     <br/>
+                <input type="file" onChange={(e)=>{ setSelectedFile(e.target.files[0]);}} />
+               
+            </div>
               </Modal.Body>  
           <Modal.Footer>  
           <Button onClick={()=>SaveTask1()}>Assign</Button>

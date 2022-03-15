@@ -4,13 +4,12 @@ import  { Component } from "react";
 
 class DefaultLayout  extends Component  {
   render() {
-    const role = localStorage.getItem("role");
-  console.log(role);
-  console.log(localStorage.getItem("role"));
+    const role =JSON.parse(localStorage.getItem("role"));
+  
   
   return (
  
-    (role == "\"Admin\"") ?
+    (role == "Admin") ?
     (
        <>
       

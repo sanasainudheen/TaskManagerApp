@@ -27,6 +27,9 @@ const createUserGroup = (data: IUserGroupData) => {
 const createUserGroupTask = (data: IUserGroupTaskData) => {
   return http.post<IUserGroupTaskData>("/Task/CreateUserGroupTask", data);
 };
+const uploadDoc = (formData:any) => {
+  return http.post("/FileUploadApi", formData);
+};
 const getAllUserGroups = () => { 
   return http.get("/Task/GetAllUserGroups");
 };
@@ -36,6 +39,17 @@ const getAllUserGroupTasks = () => {
 const getAllTasks = () => { 
   return http.get("/Task/getAllTasks");
 };
+const GetGroupTasksByUser = (id:string) => { 
+  return http.get( `/Task/GetGroupTasksByUser/${id}`);  
+};
+const AssignedTasksByUser = (id:string,statusId:string) => { 
+  return http.get( `/Task/AssignedTasksByUser/${id}/${statusId}`);  
+};
+
+const AssignedTaskDetails = (logId:string) => { 
+  return http.get( `/Task/ViewTaskDetails/${logId}`);  
+};
+
 const AssignTaskToUser = (data:IAssignUserData) => {
   return http.post<IAssignUserData>("/Task/AssignTaskToUser", data);
 };
@@ -58,9 +72,11 @@ const TaskService = {
    createUserGroup,
    createUserGroupTask,
    getAllUserGroupTasks,
-   AssignTaskToUser
-  // update,
-  // removeGroup
+   AssignTaskToUser,
+   uploadDoc,
+   GetGroupTasksByUser,
+   AssignedTasksByUser,
+   AssignedTaskDetails
 };
 
 export default TaskService;

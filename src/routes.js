@@ -7,7 +7,7 @@ const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
-// Transactions
+//Admin Transactions
 
 const Registration = React.lazy(() => import('./components/Admin/CreateUser'))
 const RegisteredUsers = React.lazy(() => import('./components/Admin/UserList'))
@@ -16,6 +16,15 @@ const CreateGroup = React.lazy(() => import('./components/Admin/CreateGroup'))
 const CreateTask = React.lazy(() => import('./components/Admin/CreateTask'))
 const UserGroup = React.lazy(() => import('./components/Admin/UserGroup'))
 const UserGroupTasks = React.lazy(() => import('./components/Admin/UserGroupTasks'))
+
+
+//User Transactions
+
+const EditProfile = React.lazy(() => import('./components/User/EditProfile'))
+const ViewGroupTasks = React.lazy(() => import('./components/User/ViewGroupTasks'))
+const AssignedTasks = React.lazy(() => import('./components/User/AssignedTasks'))
+const TaskDetails = React.lazy(() => import('./components/User/TaskDetails'))
+
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -79,6 +88,15 @@ const routes = [
   { path: '/base/CreateTask', name: 'CreateTask', component: CreateTask },
   { path: '/base/UserGroup', name: 'UserGroup', component: UserGroup },
   { path: '/base/UserGroupTasks', name: 'UserGroupTasks', component: UserGroupTasks },
+
+
+  { path: '/base/EditProfile', name: 'EditProfile', component: EditProfile },
+  { path: '/base/ViewGroupTasks', name: 'ViewGroupTasks', component: ViewGroupTasks },
+  { path: '/base/AssignedTasks', name: 'AssignedTasks', component: AssignedTasks },
+  { path: '/TaskDetails' , name: 'TaskDetails', component:TaskDetails },
+
+
+
   { path: '/base/accordion', name: 'Accordion', component: Accordion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/base/cards', name: 'Cards', component: Cards },

@@ -11,9 +11,6 @@ import { sygnet } from '../assets/brand/sygnet'
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
-
-// sidebar nav config
-//import navigation from '../_nav'
 import nav from '../user_nav'
 
 const AppUserSidebar = () => {

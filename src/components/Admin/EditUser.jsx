@@ -64,7 +64,9 @@ const EditUser = (props) => {
      UserDataService.getUserById(props.location.state)   
       .then((response) => {
         console.log(response.data);
-        setUser(response.data);       
+        
+        setUser(response.data);    
+        console.log(user);   
       })
       .catch((e) => {
         console.log(e);

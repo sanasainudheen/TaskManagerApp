@@ -55,25 +55,25 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Registration',
-        to: '/base/Registration',
+        name: 'Edit Profile',
+        to: '/base/EditProfile',
       },
-    //   {
-    //     component: CNavItem,
-    //     name: 'Registered Users',
-    //     to: '/base/RegisteredUsers',
-    //   },
-    //   ,
-    //   {
-    //     component: CNavItem,
-    //     name: 'Create Group',
-    //     to: '/base/CreateGroup',
-    //   },
-    //   {
-    //     component: CNavItem,
-    //     name: 'Create Task',
-    //     to: '/base/CreateTask',
-    //   },
+       {
+         component: CNavItem,
+         name: 'Group Tasks',
+         to: '/base/ViewGroupTasks',
+       },
+       ,
+       {
+         component: CNavItem,
+         name: 'Assigned Tasks',
+         to: '/base/AssignedTasks',
+      },
+      //  {
+      //    component: CNavItem,
+      //    name: 'Move Task',
+      //    to: '/base/CreateTask',
+      //  },
     //   {
     //     component: CNavItem,
     //     name: 'User Groups',
