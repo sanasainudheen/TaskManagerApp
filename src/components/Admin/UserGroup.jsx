@@ -171,35 +171,7 @@ onChange={ e=>{handleGroupChange(e);setGroupValue(e.target.selectedOptions[0].va
         </tbody>
       </table>
             </div>
-            {/* <div>      
-            <Fragment> 
-            <Modal isOpen={deleteModal} toggle={closeDeleteModal} backdrop="static">
-            <Modal.Header closeButton>  
-                        <Modal.Title id="sign-in-title">  
-                           Choose the User  
-                         </Modal.Title>  
-                    </Modal.Header>  
-                    <Modal.Body>  
-                    <div  className="col-md-6">
-    <label htmlFor="service">Select a User</label>
-   
-   <select  className="form-control" value={selUser} onChange={e=>setSelUser(e.currentTarget.value)}>
-   {
-       users.map(({Id,Name})=>(
-           <option
-           key={Id} value={Id}>{Name}</option>
-       ))
-   }
-   </select>
-    </div>                       
-                    </Modal.Body>  
-                                            <ModalFooter>
-                                            <button type="button" className="btn btn-outline-info" onClick={() => selectUser(selUser)}> Select User</button>
-                                                <Button onClick={closeDeleteModal}>Cancel</Button>
-                                            </ModalFooter>
-                                        </Modal>
-                                        </Fragment>
-                                        </div> */}
+          
                                         <Modal show={show} onHide={()=>handleModal()}>  
           <Modal.Header closeButton>Select a user</Modal.Header>  
           <Modal.Body>

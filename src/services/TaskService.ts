@@ -46,21 +46,17 @@ const AssignedTasksByUser = (id:string,statusId:string) => {
   return http.get( `/Task/AssignedTasksByUser/${id}/${statusId}`);  
 };
 
-const AssignedTaskDetails = (logId:string) => { 
-  return http.get( `/Task/ViewTaskDetails/${logId}`);  
+const AssignedTaskDetails = (userGroupTaskId:string,userId:string) => { 
+  return http.get( `/Task/ViewTaskDetails/${userGroupTaskId}/${userId}`);  
 };
 
 const AssignTaskToUser = (data:IAssignUserData) => {
   return http.post<IAssignUserData>("/Task/AssignTaskToUser", data);
 };
-// const update = (id: any, data: IGroupData) => {
-//   return http.put<any>(`/user/${id}`, data);
-// };
+const updateUserStatus = (data:any) => {
+  return http.post("/Task/updateUserStatus", data);
+};
 
-// const removeGroup = (groupId: any) => {
-
-//   return http.delete<any>(`/Task/${groupId}`);
-// };
 
 
 const TaskService = {
@@ -76,7 +72,8 @@ const TaskService = {
    uploadDoc,
    GetGroupTasksByUser,
    AssignedTasksByUser,
-   AssignedTaskDetails
+   AssignedTaskDetails,
+   updateUserStatus
 };
 
 export default TaskService;
