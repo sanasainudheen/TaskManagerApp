@@ -193,21 +193,24 @@ const UserGroupTasks=(props)=>{
             TaskService.AssignTaskToUser(data)
           .then((response) => {
             if (response.data.isSuccess) {
-                alert(response.data.message); 
+                alert(response.data.message)
+                onFileUpload();
                 handleModal2();
                 TaskService.getAllUserGroupTasks() .then((res) => {                           
-                 setUserGroupTaskList(res.data);                     
-                  onFileUpload();
+                 setUserGroupTaskList(res.data);
                   })
                   .catch((e) => {
                     console.log(e);
                   });
-            }
-            else {
-                alert(response.data.errors);
-            }
-        })
-           }  
+              } 
+              else{               
+                  alert(response.data.message)
+              }
+            })
+          }
+              
+            
+              
      const  onFileChange = (e) => {
     
             // Update the state
