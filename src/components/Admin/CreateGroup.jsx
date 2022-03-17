@@ -55,8 +55,7 @@ const CreateGroup = (props) => {
               })
               .catch((e) => {
                 console.log(e);
-              });
-            
+              });            
         }
         else {
             alert(response.data.errors);

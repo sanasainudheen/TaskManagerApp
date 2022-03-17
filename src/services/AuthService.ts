@@ -11,21 +11,13 @@ class AuthService {
         userName,
         Password
       })
-      .then(response => {
-        if (response.data) {
-            localStorage.clear();
-          localStorage.setItem("token", JSON.stringify(response.data.message));
-          localStorage.setItem("role", JSON.stringify(response.data.roleName));
-          localStorage.setItem("userId", JSON.stringify(response.data.userId));
-          console.log(response.data.roleName);
-        }
-        
-        return response.data;
-      });
+     
   }
 
   logout() {
-    //localStorage.removeItem("token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("userId");
     localStorage.clear();
   }
 

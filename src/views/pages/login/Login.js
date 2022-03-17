@@ -41,18 +41,19 @@ const Login = (props) => {
   };
  //props.history.push('/');
  AuthService.login(userName, password) .then((response) => {
+   console.log(response.data);
+  if (response.data.isSuccess) {
+    localStorage.clear();
+    localStorage.setItem("token", JSON.stringify(response.data.message));
+    localStorage.setItem("role", JSON.stringify(response.data.roleName));
+    localStorage.setItem("userId", JSON.stringify(response.data.userId));
   props.history.push('/');
-},
-error => {
-const resMessage =
-  (error.response &&
-    error.response.data &&
-    error.response.data.message) ||
-  error.message ||
-  error.toString();
-  setMessage("Invalid Credentials");
-
-});
+  }
+  else {
+    localStorage.clear();
+    alert(response.data.message);
+}
+ });
 }
  
   const formik = useFormik({

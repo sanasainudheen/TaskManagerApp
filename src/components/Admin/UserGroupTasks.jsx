@@ -21,6 +21,7 @@ const UserGroupTasks=(props)=>{
     const [selUserGroupTaskId, setSelUserGroupTaskId] = React.useState("");
     const [selectedFile, setSelectedFile] = React.useState(null);
     const[note,setNote]=React.useState("");
+    const [selAssigningTask, setSelAssigningTask] = React.useState("");
   
     const tasksRef = useRef();
     tasksRef.current = taskList;

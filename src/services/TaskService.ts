@@ -54,7 +54,7 @@ const AssignTaskToUser = (data:IAssignUserData) => {
   return http.post<IAssignUserData>("/Task/AssignTaskToUser", data);
 };
 const updateUserStatus = (data:any) => {
-  return http.post("/Task/updateUserStatus", data);
+  return http.post("/Task/UpdateUserStatus", data);
 };
 
 
